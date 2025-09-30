@@ -1,61 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Client Dashboard
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern Vue 3 + Laravel dashboard for client management, analytics, and insights.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Technologies Used
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Frontend: Vue 3 (Composition API, TypeScript, Vite)
+- UI: Tailwind CSS, Heroicons
+- Design System: Atomic Design (atoms, molecules, organisms, layouts)
+- Routing: Vue Router (dynamic paging routes)
+- API: Laravel (REST JSON), PHP 8+
+- State/Data: Composition API refs/computeds
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Project Structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+src/  
+ 1-atoms/    # Smallest UI elements (Button.vue, Input.vue, Icon.vue, TableCell.vue)  
+ 2-molecules/  # Combo UI elements (TableRow.vue, CardStat.vue)  
+ 3-organisms/  # Functional modules (ClientTable.vue, SidebarMenu.vue)  
+ 4-layouts/   # Page layouts (DashboardLayout.vue)  
+ pages/      # Top-level pages (Dashboard.vue, ClientsDashboard.vue)  
+ router/     # Vue Router config  
+api/        # Laravel controllers, models, migrations  
+public/      # Static assets
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Atomic Design: Reusable UI, combine atoms → molecules → organisms → layouts → pages.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Routing
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Dashboard: `/dashboard`
+- Clients List: `/dashboard/clients/page/:page/show/:perPage`
+- Add Client: `/clients/new`
 
-### Premium Partners
+Dynamic route params for pagination; routes control fetch and reload.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## Core Processes
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Data Fetching:** Loads paginated clients from `/api/clients?page=x&per_page=y`
+- **Client Table:** Paginated, atomic TableRow/TableCell, router-driven controls
+- **Analytics & KPIs:** Dashboard cards and charts, render only after API data loads
+- **CRUD:** Add/Edit clients, validation handled in backend
+- **Icons:** All heroicons via atomic Icon.vue, pass icon name and style
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Development Helper Commands
 
-## Security Vulnerabilities
+**Backend (Laravel)**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- `php artisan migrate:fresh --seed`
+- `php artisan serve`
 
-## License
+**Frontend (Vue 3 + Vite)**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- `pnpm install`
+- `pnpm dev`
+- `pnpm build`
+- `pnpm format`
+
+---
+
+## References
+
+- Atomic Design: https://bradfrost.com/blog/post/atomic-web-design/
+- Vue 3 Docs: https://vuejs.org
+- Laravel Docs: https://laravel.com/docs
+- TailwindCSS: https://tailwindcss.com/docs
+- Heroicons: https://heroicons.com
+
+---
+
+## Notes
+
+- All new widgets/components: follow atomic folder structure.
+- For new endpoints, update backend API controller.
+- Run migrations and reseed as needed.
+- Charts and icons are configured via props.
+
+---
+
+Happy Building!
