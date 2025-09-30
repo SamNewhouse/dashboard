@@ -55,15 +55,17 @@ Dynamic route params for pagination; routes control fetch and reload.
 
 **Backend (Laravel)**
 
-- `php artisan migrate:fresh --seed`
-- `php artisan serve`
+- `./vendor/bin/sail up -d`
+- `./vendor/bin/sail down -v`
+- `./vendor/bin/sail artisan migrate:fresh --seed`
+- `./vendor/bin/sail npm run dev`
 
-**Frontend (Vue 3 + Vite)**
-
-- `pnpm install`
-- `pnpm dev`
-- `pnpm build`
-- `pnpm format`
+- `php artisan cache:clear`
+- `php artisan cache:table`
+- `php artisan config:clear`
+- `php artisan route:clear`
+- `php artisan route:list`
+- `composer dump-autoload`
 
 ---
 
